@@ -1,32 +1,24 @@
 import React, { useState } from 'react';
 import Papa from 'papaparse';
-import Table from "./components/table";
 import CodeEditor from '@uiw/react-textarea-code-editor';
+import Table from "./components/Table";
+import Sidebar from "./components/Sidebar";
+import {predefinedQueries, csvPaths} from "./Constants";
 
 const App = () => {
     const [code, setCode] = React.useState('');
     const [CSVData, setCSVData] = useState();
     const [CSVHeader, setCSVHeader] = useState([]);
-    //const [selectedQuery, setSelectedQuery] = useState(0);
-    const predefinedQueries = [
-        {
-            name: 'All Users',
-            query: 'Select * from Users;'
-        },
-        {
-            name: 'All Orders',
-            query: 'Select * from Orders;'
-        },
-        {
-            name: 'Top 5 orders',
-            query: 'Select * from Orders order by time desc limit 5;'
-        }
-    ]
+
+
+    /* These queries are just for displaying in the UI, They are not correct in terms of accuracy */
+
 
     const commonConfig = { delimiter: "," };
     const fetchResults = () => {
+        const path = csvPaths[Math.floor(Math.random() * csvPaths.length)] //randomly select a csv to render
         Papa.parse(
-            "/data/orders.csv",
+            `/data/${path}`,
             {
                 ...commonConfig,
                 header: true,
@@ -44,15 +36,18 @@ const App = () => {
     }
     return (
         <>
+            <Sidebar />
+            <h3>Select any query</h3>
             <select onChange={dropdownChange}>
                 {predefinedQueries.map((item, index) => {
                     return <option key={index} value={item.query}>{item.name}</option>;
                 })}
             </select>
+            <h3>Input</h3>
             <CodeEditor
                 value={code}
                 language="sql"
-                placeholder="Please enter SQL code."
+                placeholder="Please enter your query"
                 onChange={(evn) => setCode(evn.target.value)}
                 padding={15}
                 style={{
@@ -61,7 +56,9 @@ const App = () => {
                     fontFamily: 'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace',
                 }}
             />
-            <input onClick={fetchResults} type='button' value='RUN' />
+            <input onClick={fetchResults} disabled={code === ''} type='button' value='RUN' />
+            {code !== '' ? <input onClick={() => setCode('')} type='button' value='Clear' /> : ''}
+            <h3>Output</h3>
             <Table data={CSVData} meta={CSVHeader}/>
         </>
     );

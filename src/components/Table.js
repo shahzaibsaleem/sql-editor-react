@@ -6,14 +6,13 @@ import { Column } from 'primereact/column';
 
 const Table = ({data, meta}) => {
 
-    const headerRender = meta.map((item) => {
-        return <Column field={item} header={item} style={{ minWidth: '200px' }}></Column>;
+    const headerRender = meta.map((item, index) => {
+        return <Column key={index} field={item} header={item} style={{ minWidth: '200px' }}></Column>;
     })
     return (
         <div>
             <div className="card">
-                <h5>Preloaded Data (100000 Rows)</h5>
-                <DataTable value={data} scrollable scrollHeight="400px" virtualScrollerOptions={{ itemSize: 46 }}>
+                <DataTable value={data} scrollable scrollHeight="400px" virtualScrollerOptions={{ itemSize: 50 }}>
                     {headerRender}
                 </DataTable>
             </div>
