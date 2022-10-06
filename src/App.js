@@ -36,30 +36,34 @@ const App = () => {
     }
     return (
         <>
-            <Sidebar />
-            <h3>Select any query</h3>
-            <select onChange={dropdownChange}>
-                {predefinedQueries.map((item, index) => {
-                    return <option key={index} value={item.query}>{item.name}</option>;
-                })}
-            </select>
-            <h3>Input</h3>
-            <CodeEditor
-                value={code}
-                language="sql"
-                placeholder="Please enter your query"
-                onChange={(evn) => setCode(evn.target.value)}
-                padding={15}
-                style={{
-                    fontSize: 12,
-                    backgroundColor: "#f5f5f5",
-                    fontFamily: 'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace',
-                }}
-            />
-            <input onClick={fetchResults} disabled={code === ''} type='button' value='RUN' />
-            {code !== '' ? <input onClick={() => setCode('')} type='button' value='Clear' /> : ''}
-            <h3>Output</h3>
-            <Table data={CSVData} meta={CSVHeader}/>
+            <div>
+                <Sidebar />
+            </div>
+            <div>
+                <h3>Select any query</h3>
+                <select onChange={dropdownChange}>
+                    {predefinedQueries.map((item, index) => {
+                        return <option key={index} value={item.query}>{item.name}</option>;
+                    })}
+                </select>
+                <h3>Input</h3>
+                <CodeEditor
+                    value={code}
+                    language="sql"
+                    placeholder="Please enter your query"
+                    onChange={(evn) => setCode(evn.target.value)}
+                    padding={15}
+                    style={{
+                        fontSize: 12,
+                        backgroundColor: "#f5f5f5",
+                        fontFamily: 'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace',
+                    }}
+                />
+                <input onClick={fetchResults} disabled={code === ''} type='button' value='RUN' />
+                {code !== '' ? <input onClick={() => setCode('')} type='button' value='Clear' /> : ''}
+                <h3>Output</h3>
+                <Table data={CSVData} meta={CSVHeader}/>
+            </div>
         </>
     );
 };
