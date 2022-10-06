@@ -25,16 +25,35 @@ demo: [DEMO] (https://sql-editor-react-1ztk-shahzaibsaleem.vercel.app/)
 5 - @uiw/react-textarea-code-editor: used as a input box for queries for better query formatting.
 
 # Performance
-Performance of the app is measured through Lighthouse, below are the values measured.
+Performance of the app is measured through Lighthouse and Pagespeed, below are the values measured.
+
+**Lighthouse**
 
 1 - performance - 70
+
 2 - Accessibility - 82
+
 3 - Best Practices - 100
+
 4 - First paint - 0.3s
+
 5 - Time to interactive - 1.8s
+
 6 - Largest contentful paint - 1.8s
 
-Same results on pagespeed.web.dev
+**PageSpeed**
+
+1 - performance - 80
+
+2 - First paint - 0.3s
+
+3 - Time to interactive - 1.1s
+
+4 - Largest contentful paint - 1.1s
+
+5 - Speed Index - 1.5s
+
+
 
 # Installation
 
