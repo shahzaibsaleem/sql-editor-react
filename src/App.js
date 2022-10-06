@@ -35,11 +35,11 @@ const App = () => {
         fetchResults();
     }
     return (
-        <>
-            <div>
+        <div style={{'display': 'flex'}}>
+            <div style={{'width': '30%'}}>
                 <Sidebar />
             </div>
-            <div>
+            <div style={{'marginLeft': '30px', 'width': '70%'}}>
                 <h3>Select any query</h3>
                 <select onChange={dropdownChange}>
                     {predefinedQueries.map((item, index) => {
@@ -64,7 +64,7 @@ const App = () => {
                 <h3>Output</h3>
                 <Table data={CSVData} meta={CSVHeader}/>
             </div>
-        </>
+        </div>
     );
 };
 export default App
